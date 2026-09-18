@@ -1,0 +1,171 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>07 manual proof</title>
+  </head>
+  <body>
+    <template>
+      <style>
+        #root {
+          position: absolute;
+          inset: 0;
+          overflow: hidden;
+          background: #08080a;
+          color: #e9e9ec;
+          font-family: "IBM Plex Mono", ui-monospace, monospace;
+        }
+        #s07-grid {
+          position: absolute;
+          inset: 0;
+          background-image:
+            linear-gradient(to right, #26262c 1px, transparent 1px),
+            linear-gradient(to bottom, #26262c 1px, transparent 1px);
+          background-size: 56px 56px;
+          opacity: 0.32;
+          pointer-events: none;
+        }
+        #s07-stage {
+          position: absolute;
+          inset: 72px 96px 72px;
+          display: flex;
+          flex-direction: column;
+        }
+        #s07-chrome {
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+          margin-bottom: 28px;
+        }
+        #s07-brand {
+          font-size: 22px;
+          font-weight: 600;
+        }
+        #s07-mode {
+          display: inline-flex;
+          font-size: 16px;
+          letter-spacing: 0.08em;
+          text-transform: uppercase;
+          color: #e9e9ec;
+          background: #2f4a73;
+          border: 2px solid #2f4a73;
+          border-radius: 6px;
+          padding: 6px 12px;
+        }
+        #s07-kicker {
+          font-size: 18px;
+          letter-spacing: 0.14em;
+          text-transform: uppercase;
+          color: #9a9aa4;
+          margin-bottom: 8px;
+        }
+        #s07-title {
+          font-size: 40px;
+          font-weight: 600;
+          margin-bottom: 8px;
+        }
+        #s07-sub {
+          font-size: 20px;
+          color: #9a9aa4;
+          margin-bottom: 28px;
+          max-width: 1500px;
+        }
+        #s07-hashbox {
+          background: #111114;
+          border: 2px solid #26262c;
+          border-radius: 10px;
+          padding: 28px 32px;
+          margin-bottom: 22px;
+        }
+        #s07-hash-lab {
+          font-size: 16px;
+          letter-spacing: 0.1em;
+          text-transform: uppercase;
+          color: #9a9aa4;
+          margin-bottom: 10px;
+        }
+        #s07-hash {
+          font-size: 22px;
+          color: #5b9dff;
+          letter-spacing: -0.01em;
+          word-break: break-all;
+        }
+        #s07-meta {
+          margin-top: 12px;
+          font-size: 18px;
+          color: #9a9aa4;
+        }
+        #s07-stats {
+          display: grid;
+          grid-template-columns: 1fr 1fr;
+          gap: 20px;
+          flex: 1;
+        }
+        .s07-card {
+          background: #111114;
+          border: 2px solid #26262c;
+          border-radius: 10px;
+          padding: 32px 36px;
+        }
+        .s07-lab {
+          font-size: 16px;
+          letter-spacing: 0.1em;
+          text-transform: uppercase;
+          color: #9a9aa4;
+          margin-bottom: 16px;
+        }
+        .s07-line {
+          font-size: 36px;
+          font-weight: 600;
+          font-variant-numeric: tabular-nums;
+        }
+        .s07-healthy {
+          color: #34c77b;
+        }
+      </style>
+      <div id="root" data-composition-id="scene-07" data-width="1920" data-height="1080" data-duration="10">
+        <div id="s07-grid"></div>
+        <div id="s07-stage">
+          <div id="s07-chrome">
+            <div id="s07-brand">DELEVA</div>
+            <div id="s07-mode">Manual execution</div>
+          </div>
+          <div id="s07-kicker">On-chain proof · not threshold-triggered</div>
+          <div id="s07-title">Verified execution path</div>
+          <div id="s07-sub">
+            Invoked while HF 2.0795 was above 1.50. Proves Almanak → ActionBundle → adapter → KeeperHub → Aave. Separate from the autonomous cycle.
+          </div>
+          <div id="s07-hashbox">
+            <div id="s07-hash-lab">Base transaction</div>
+            <div id="s07-hash">0xd36217b09ba81cea624e88e756514f2ebc0dc689a20dad4286d6f852f205ec57</div>
+            <div id="s07-meta">Confirmed · block 51,395,399 · receipt success</div>
+          </div>
+          <div id="s07-stats">
+            <div class="s07-card" id="s07-c1">
+              <div class="s07-lab">Debt</div>
+              <div class="s07-line">$11.9985 → $1.9998</div>
+            </div>
+            <div class="s07-card" id="s07-c2">
+              <div class="s07-lab">Health factor</div>
+              <div class="s07-line s07-healthy">2.0795 → 12.454</div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <script>
+        (function () {
+          const tl = gsap.timeline({ paused: true });
+          tl.fromTo("#s07-brand", { opacity: 0, y: 12 }, { opacity: 1, y: 0, duration: 0.28, ease: "power3.out" }, 0.08);
+          tl.fromTo("#s07-mode", { opacity: 0, y: 12 }, { opacity: 1, y: 0, duration: 0.28, ease: "power3.out" }, 0.14);
+          tl.fromTo("#s07-kicker", { opacity: 0, y: 14 }, { opacity: 1, y: 0, duration: 0.28, ease: "power4.out" }, 0.22);
+          tl.fromTo("#s07-title", { opacity: 0, y: 18 }, { opacity: 1, y: 0, duration: 0.36, ease: "power4.out" }, 0.32);
+          tl.fromTo("#s07-sub", { opacity: 0, y: 12 }, { opacity: 1, y: 0, duration: 0.32, ease: "power3.out" }, 0.5);
+          tl.fromTo("#s07-hashbox", { opacity: 0, y: 18 }, { opacity: 1, y: 0, duration: 0.4, ease: "power3.out" }, 0.85);
+          tl.fromTo("#s07-c1", { opacity: 0, y: 18 }, { opacity: 1, y: 0, duration: 0.36, ease: "power3.out" }, 1.2);
+          tl.fromTo("#s07-c2", { opacity: 0, y: 18 }, { opacity: 1, y: 0, duration: 0.36, ease: "power3.out" }, 1.35);
+          window.__timelines["scene-07"] = tl;
+        })();
+      </script>
+    </template>
+  </body>
+</html>

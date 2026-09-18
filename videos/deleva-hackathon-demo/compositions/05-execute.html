@@ -1,0 +1,143 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>05 execute</title>
+  </head>
+  <body>
+    <template>
+      <style>
+        #root {
+          position: absolute;
+          inset: 0;
+          overflow: hidden;
+          background: #08080a;
+          color: #e9e9ec;
+          font-family: "IBM Plex Mono", ui-monospace, monospace;
+        }
+        #s05-grid {
+          position: absolute;
+          inset: 0;
+          background-image:
+            linear-gradient(to right, #26262c 1px, transparent 1px),
+            linear-gradient(to bottom, #26262c 1px, transparent 1px);
+          background-size: 56px 56px;
+          opacity: 0.32;
+          pointer-events: none;
+        }
+        #s05-stage {
+          position: absolute;
+          inset: 72px 96px 80px;
+          display: flex;
+          flex-direction: column;
+        }
+        #s05-chrome {
+          display: flex;
+          justify-content: space-between;
+          margin-bottom: 48px;
+        }
+        #s05-brand {
+          font-size: 22px;
+          font-weight: 600;
+        }
+        #s05-ctx {
+          font-size: 18px;
+          letter-spacing: 0.12em;
+          text-transform: uppercase;
+          color: #9a9aa4;
+        }
+        #s05-stack {
+          width: 1100px;
+          margin: auto;
+          display: flex;
+          flex-direction: column;
+          gap: 20px;
+        }
+        .s05-card {
+          background: #111114;
+          border: 2px solid #26262c;
+          border-radius: 10px;
+          padding: 36px 44px;
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+        }
+        .s05-kicker {
+          font-size: 16px;
+          letter-spacing: 0.14em;
+          text-transform: uppercase;
+          color: #9a9aa4;
+          margin-bottom: 8px;
+        }
+        .s05-title {
+          font-size: 36px;
+          font-weight: 600;
+        }
+        .s05-badge {
+          display: inline-flex;
+          align-items: center;
+          gap: 10px;
+          font-size: 16px;
+          letter-spacing: 0.08em;
+          text-transform: uppercase;
+          border-radius: 999px;
+          padding: 8px 16px;
+        }
+        .s05-ok {
+          color: #34c77b;
+          background: #16371f;
+          border: 2px solid #16371f;
+        }
+        .s05-dot {
+          width: 8px;
+          height: 8px;
+          border-radius: 50%;
+          background: currentColor;
+        }
+        #s05-note {
+          font-size: 20px;
+          color: #9a9aa4;
+          text-align: center;
+          margin-top: 8px;
+        }
+      </style>
+      <div id="root" data-composition-id="scene-05" data-width="1920" data-height="1080" data-duration="7">
+        <div id="s05-grid"></div>
+        <div id="s05-stage">
+          <div id="s05-chrome">
+            <div id="s05-brand">DELEVA</div>
+            <div id="s05-ctx">KeeperHub executes</div>
+          </div>
+          <div id="s05-stack">
+            <div class="s05-card" id="s05-c1">
+              <div>
+                <div class="s05-kicker">KeeperHub</div>
+                <div class="s05-title">Execution</div>
+              </div>
+              <div class="s05-badge s05-ok"><span class="s05-dot"></span> Confirmed</div>
+            </div>
+            <div class="s05-card" id="s05-c2">
+              <div>
+                <div class="s05-kicker">Aave V3</div>
+                <div class="s05-title">Repayment executed</div>
+              </div>
+              <div class="s05-badge s05-ok"><span class="s05-dot"></span> On-chain</div>
+            </div>
+            <div id="s05-note">Simulate first. Execute only on a clean result.</div>
+          </div>
+        </div>
+      </div>
+      <script>
+        (function () {
+          const tl = gsap.timeline({ paused: true });
+          tl.fromTo("#s05-brand", { opacity: 0, y: 14 }, { opacity: 1, y: 0, duration: 0.3, ease: "power3.out" }, 0.08);
+          tl.fromTo("#s05-ctx", { opacity: 0, y: 14 }, { opacity: 1, y: 0, duration: 0.3, ease: "power3.out" }, 0.14);
+          tl.fromTo("#s05-c1", { opacity: 0, y: 28 }, { opacity: 1, y: 0, duration: 0.45, ease: "power3.out" }, 0.2);
+          tl.fromTo("#s05-c2", { opacity: 0, y: 28 }, { opacity: 1, y: 0, duration: 0.45, ease: "power3.out" }, 0.48);
+          tl.fromTo("#s05-note", { opacity: 0, y: 12 }, { opacity: 1, y: 0, duration: 0.32, ease: "power3.out" }, 0.95);
+          window.__timelines["scene-05"] = tl;
+        })();
+      </script>
+    </template>
+  </body>
+</html>
