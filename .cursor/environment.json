@@ -1,0 +1,16 @@
+{
+  "name": "DELEVA",
+  "user": "ubuntu",
+  "install": "./.cursor/install.sh",
+  "terminals": [
+    {
+      "name": "backend",
+      "command": "cd proof && ../.venv/bin/uvicorn api.main:app --host 127.0.0.1 --port 8000 --reload"
+    },
+    {
+      "name": "frontend",
+      "command": "cd web && npm run dev"
+    }
+  ],
+  "ports": [8000, 5173]
+}
