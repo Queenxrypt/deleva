@@ -1,0 +1,11 @@
+# Never commit real secrets.
+.env
+.env.local
+
+# Local engine continuity state (executionIds/timestamps only, no secrets --
+# still not something to commit).
+.deleva_state.json
+
+__pycache__/
+*.pyc
+.pytest_cache/

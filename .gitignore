@@ -1,0 +1,47 @@
+# --- secrets: never commit real values -------------------------------------
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+.keeperhub_api_key
+
+# --- Python -----------------------------------------------------------------
+__pycache__/
+*.pyc
+.pytest_cache/
+*.egg-info/
+.venv/
+venv/
+
+# --- local engine state (executionIds/timestamps only, no secrets, still not
+# something to commit) -------------------------------------------------------
+.deleva_state.json
+
+# --- Node / frontend ---------------------------------------------------------
+node_modules/
+dist/
+*.tsbuildinfo
+
+# --- editor / OS --------------------------------------------------------------
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
+
+# --- local tooling state, not part of the product -----------------------------
+.claude/
+
+# --- investigation-only material, never part of the product (see README) ------
+# Includes clones of third-party repositories gathered during research --
+# excluded to avoid redistributing code we don't have redistribution rights to,
+# and because it was never intended to ship. Flagged separately for review.
+scratch/
+
+# --- vendored third-party SDK ---------------------------------------------
+# Apache-2.0 licensed and independently published on PyPI (`pip install
+# almanak`) -- excluded here rather than committed as a raw vendored copy,
+# since it carries its own nested .git repos and a .venv. Flagged separately
+# for review: this may instead belong as a git submodule, or be vendored
+# properly (its own .git removed) if you want it inside this repo.
+almanak-sdk/

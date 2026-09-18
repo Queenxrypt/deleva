@@ -1,0 +1,72 @@
+C:\Users\User\almanak-keeperhub-test\proof\almanak_to_keeperhub.py:104: SymbolTokenResolutionWarning: WrapNativeIntent.token received symbol-based token reference 'WETH' on base. Symbol-based token resolution is deprecated because it is unreliable. Use the chain-specific token contract address or a CAIP-19 asset identifier instead. Symbol references will be rejected in Almanak SDK 3.0.0 and later.
+  intent = WrapNativeIntent(token="WETH", amount=Decimal("0.001"), chain="base")
+token_registry_address_collision chain=avalanche address=0x49d5c2bdffac6ce2bfdb6640f4f80f226bc10bab kept_symbol=WETH dropped_symbol=WETH.E reason=first-write-wins
+token_registry_address_collision chain=xlayer address=0x779ded0c9e1022225f8e0630b35a9b54be713736 kept_symbol=USDT dropped_symbol=USDT0 reason=first-write-wins
+protocol_metadata_address_collision chain=arbitrum protocol=pendle address=0x71fbf40651e9d4278a74586afc99f307f369ce9a kept_symbol=PT-WSTETH dropped_symbol=PT-WSTETH-25JUN2026
+protocol_metadata_address_collision chain=arbitrum protocol=pendle address=0x25bda1edd6af17c61399aa0eb84b93daa3069764 kept_symbol=YT-WSTETH-25JUN2026 dropped_symbol=YT-WSTETH-25JUN2026
+PLACEHOLDER PRICES served (use=unit_test) - NOT SAFE FOR PRODUCTION. ETH=$2000 (real ~$3400), BTC=$45000 (real ~$105000)
+IntentCompiler using PLACEHOLDER PRICES. Slippage calculations will be INCORRECT. This is only acceptable for unit tests.
+C:\Users\User\almanak-keeperhub-test\proof\almanak_to_keeperhub.py:117: SymbolTokenResolutionWarning: TokenResolver.resolve received symbol-based token reference 'WETH' on base. Symbol-based token resolution is deprecated because it is unreliable. Use the chain-specific token contract address or a CAIP-19 asset identifier instead. Symbol references will be rejected in Almanak SDK 3.0.0 and later.
+  result = compiler.compile(intent)
+No RPC URL or gateway client - cannot query native balance
+================================================================================
+STEP 1: Strategy layer -> Intent
+================================================================================
+Intent: WrapNativeIntent(registry_handle=None, token='WETH', amount=Decimal('0.001'), chain='base', intent_id='e080e394-af02-4584-8d98-1f76b33e1e51', created_at=datetime.datetime(2026, 9, 14, 12, 34, 52, 570642, tzinfo=datetime.timezone.utc))
+
+================================================================================
+STEP 2: Intent -> ActionBundle (IntentCompiler.compile) -- OFFLINE, no RPC
+================================================================================
+CompilationStatus: SUCCESS
+ActionBundle.to_dict():
+{
+  "intent_type": "WRAP_NATIVE",
+  "transactions": [
+    {
+      "to": "0x4200000000000000000000000000000000000006",
+      "value": "1000000000000000",
+      "data": "0xd0e30db0",
+      "gas_estimate": 30000,
+      "description": "Wrap 0.001 native to WETH",
+      "tx_type": "wrap"
+    }
+  ],
+  "metadata": {
+    "token": "WETH",
+    "amount": "0.001",
+    "chain": "base",
+    "price_provenance": {
+      "used_peg": false,
+      "peg_tokens": []
+    }
+  }
+}
+
+================================================================================
+STEP 3 (interception point): stop BEFORE Almanak's signer/gateway
+================================================================================
+No ExecutionOrchestrator was constructed. No Signer/Submitter/Simulator exist in this process. `almanak_tx` below is the exact unsigned transaction Almanak produced, exported as plain data:
+{
+  "to": "0x4200000000000000000000000000000000000006",
+  "value": "1000000000000000",
+  "data": "0xd0e30db0",
+  "gas_estimate": 30000,
+  "description": "Wrap 0.001 native to WETH",
+  "tx_type": "wrap"
+}
+
+================================================================================
+STEP 4: our adapter -> KeeperHub contract-call request body
+================================================================================
+{
+  "contractAddress": "0x4200000000000000000000000000000000000006",
+  "chainId": 8453,
+  "functionName": "deposit",
+  "functionArgs": "[]",
+  "abi": "[{\"inputs\": [], \"name\": \"deposit\", \"outputs\": [], \"stateMutability\": \"payable\", \"type\": \"function\"}]",
+  "value": "0.001",
+  "simulate": true
+}
+
+NOTE: this script does not call any KeeperHub API. It only proves the
+structural translation. No network call, no API key, no funds.
