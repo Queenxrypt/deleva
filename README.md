@@ -1,13 +1,15 @@
 # DELEVA
 
-**Autonomous DeFi position management.**
-**Almanak decides. KeeperHub executes.**
+**Autonomous DeFi position management. Almanak decides. KeeperHub executes.**
 
-DELEVA monitors an Aave V3 position on Base, and when its health factor
-crosses a configured risk threshold, has Almanak compile the exact
-deleverage action needed, translates it for KeeperHub, simulates it, and —
-only on a clean simulation — executes it. Built for the KeeperHub Agent
-Economy Hackathon.
+DELEVA is an autonomous DeFi position manager for Aave V3 on Base. It
+continuously monitors a position's health factor and, when it falls below a
+configured risk threshold, uses Almanak to determine and compile the
+required deleverage action. DELEVA then routes that action to KeeperHub,
+which simulates the transactions before executing them on Base and tracks
+the execution status. The goal is simple: automatically reduce position
+risk without requiring the user to manually react to a health-factor
+breach.
 
 ## Proof transactions
 
@@ -23,8 +25,9 @@ https://basescan.org/tx/0xd16bd7157d4415d7899345c8787858e0affdc01800739225635f04
 
 DELEVA's own `MonitoringRunner`, running unattended in `LIVE` mode, detected
 a real Aave V3 health-factor breach (1.28, below the 1.50 trigger) and
-autonomously executed a 2.93256692 USDC deleverage through KeeperHub. No
-human triggered this cycle. Full evidence, including every activity-log
+autonomously executed a 2.93256692 USDC deleverage through KeeperHub,
+bringing the health factor back to approximately 1.50. No human triggered
+this cycle. Full evidence, including every activity-log
 timestamp and an independent cross-check against KeeperHub's own status API,
 is in [`proof/DELEVA_AUTONOMOUS_PROOF.md`](proof/DELEVA_AUTONOMOUS_PROOF.md).
 **This transaction hash must never be replaced or relabeled.**
@@ -42,7 +45,7 @@ that the Almanak `DeleverageIntent` → `ActionBundle` → KeeperHub → Aave V3
 path executes correctly end to end before autonomous monitoring was running.
 It reduced real debt from $11.9985 to $1.9998. Full evidence is in
 [`proof/DELEVA_TRANSACTION_PROOF.md`](proof/DELEVA_TRANSACTION_PROOF.md).
-**This transaction hash must never be replaced** — not by the earlier WETH
+**This transaction hash must never be replaced**, not by the earlier WETH
 feasibility test (superseded, see
 [`proof/DELEVA_INITIAL_BLOCKER.md`](proof/DELEVA_INITIAL_BLOCKER.md)), and
 not by a demo/mock hash.
@@ -79,7 +82,7 @@ Base  -------------------------------  settlement
 
 DELEVA never hand-builds a repay/approve transaction. `deleva/almanak_interface.py`
 calls the real, vendored Almanak SDK's `IntentCompiler.compile()` on a real
-`DeleverageIntent` — the exact call shape that produced the real proof
+`DeleverageIntent`: the exact call shape that produced the real proof
 transaction. The repay amount is derived from the strategy's target health
 factor (`deleva/engine.py::_deleverage_amount`), not hardcoded, using Aave's
 own health-factor formula: `debt_needed_for_target = collateral_usd *
@@ -101,9 +104,9 @@ integration.
 ### Aave V3 integration
 
 Reads go through `Pool.getUserAccountData(address)` (Base:
-`0xA238Dd80C259a72e81d7e4664a9801593F98d1c5`) — the same read verified
+`0xA238Dd80C259a72e81d7e4664a9801593F98d1c5`), the same read verified
 repeatedly against the real deployment throughout this project. Position
-data is protocol-level (Aave's own aggregate account read), not per-asset —
+data is protocol-level (Aave's own aggregate account read), not per-asset:
 per-asset token amounts (e.g. exact WETH supplied) are not exposed by this
 model.
 
@@ -128,54 +131,36 @@ without changing the engine itself.
 `DELEVA_EXECUTION_DRY_RUN` defaults to `true` everywhere in this codebase.
 In `DRY_RUN`, the engine reads the real position, calls the real Almanak
 compiler, and simulates the first transaction leg for real against
-KeeperHub — but never calls execute. `LIVE` is the only mode that ever
+KeeperHub, but never calls execute. `LIVE` is the only mode that ever
 calls `KeeperHubClient.execute_contract_call`/`execute_and_wait`, and it is
-never flipped on by any code path — only by an operator explicitly setting
-the environment variable before the process starts. The backend API never
-overrides this, and the frontend has no control that can flip it.
-
-### Demo mode
-
-`deleva/demo.py::run_local_demo()` runs a fully deterministic, three-cycle
-simulation (HEALTHY -> THRESHOLD_BREACHED -> HEALTHY) using a scripted
-position sequence and a fully mocked KeeperHub client — no network call is
-ever made. The one real component it exercises is Almanak: the
-`ActionBundle` in cycle 2 is genuinely compiled by the real IntentCompiler.
-Every demo transaction hash is prefixed `0xDEMO...` and is asserted (in
-tests) to never match the real proof hash. The frontend labels this mode
-explicitly wherever it appears.
+never flipped on by any code path; only an operator explicitly setting the
+environment variable before the process starts turns it on. The backend
+API never overrides this, and the frontend has no control that can flip
+it.
 
 ### Known limitations (documented, not hidden)
 
-1. **Multi-leg timeout/resume is simplified.** If a KeeperHub execution
-   times out mid-bundle, the engine records the pending `executionId` and
-   resolves it (a single status check, not a blind retry) on the *next*
-   cycle — but does not automatically resume and execute the remaining
+1. **Multi-transaction execution recovery is simplified.** If a KeeperHub
+   execution times out mid-bundle, the engine records the pending
+   `executionId` and resolves it with a single status check on the *next*
+   cycle, rather than automatically resuming and completing the remaining
    legs of that same bundle. The next cycle re-reads the position and
    decides fresh. This is safe (an ERC-20 approve is idempotent; a repay
-   amount is bounded by real outstanding debt) but is not a full
+   amount is bounded by real outstanding debt), but it is not a full
    saga/resumption engine.
-2. **The repay amount sizing** targets the strategy's `target_health_factor`
-   but uses a fixed floor (`DELEVA_MIN_DELEVERAGE_AMOUNT`, default 10 USDC)
-   to avoid dust transactions — it does not account for slippage, price
+2. **Minimum deleverage size is configurable, not adaptive.**
+   `DELEVA_MIN_DELEVERAGE_AMOUNT` (default 10 USDC) is a fixed floor used
+   to avoid dust transactions. It does not account for slippage, price
    movement between compile and execution, or gas cost optimization.
-3. **Background monitoring is real.** `POST /api/engine/start` runs
-   `MonitoringRunner` on a background thread inside the API process itself
-   (`deleva/runner.py::start_in_background`) against the same
-   `AutonomousEngine` instance every other route reads — this is what
-   produced the autonomous proof transaction above, not the CLI. A
-   dedicated `_cycle_lock` (added after the initial background-loop work)
-   prevents a manual `run-once` call from ever racing an in-flight
-   autonomous cycle, including one still finishing after `POST
-   /api/engine/stop`. An unexpected cycle-level exception (e.g. a
-   transient KeeperHub/network failure) degrades the loop — surfaced via
-   `runner_error` in `/api/engine/status` — rather than silently killing
-   it; it clears on the next successful cycle. The CLI's own
-   `python -m deleva start` remains available as a separate, foreground
-   loop against its own engine instance; the CLI and the API never share
-   one running process.
-4. Per-asset token amounts (e.g. exact WETH collateral quantity) are not
-   exposed — only Aave's own protocol-level USD-denominated aggregates.
+3. **Background monitoring runs inside the API process.**
+   `POST /api/engine/start` runs `MonitoringRunner` on a background thread
+   inside the API process itself, not as a separate, dedicated worker or
+   service. This is what produced the autonomous proof transaction above.
+   A CLI-only foreground loop (`python -m deleva start`) is also
+   available, but the CLI and the API never share one running process.
+4. **Strategy scope is limited to Aave V3 deleveraging on Base.** DELEVA
+   does not currently support other protocols, other chains, or other
+   strategy types.
 
 ## Project structure
 
@@ -217,9 +202,9 @@ uvicorn api.main:app --reload --port 8000
 ```
 
 Without `KEEPERHUB_API_KEY`/`DELEVA_MONITORED_WALLET` set, the API still
-starts — `/api/health` and `/api/strategy` work immediately, and
+starts. `/api/health` and `/api/strategy` work immediately, and
 `/api/position`/`/api/engine/status` report themselves explicitly
-unavailable (never fake data). `/api/demo/run` never requires configuration.
+unavailable (never fake data).
 
 CLI (same engine, no HTTP layer):
 
@@ -227,7 +212,6 @@ CLI (same engine, no HTTP layer):
 python -m deleva status
 python -m deleva once
 python -m deleva dry-run
-python -m deleva demo
 python -m deleva start   # foreground loop, Ctrl+C to stop
 ```
 
@@ -249,7 +233,7 @@ cd proof
 python -m pytest test_adapter.py tests/ -v
 ```
 
-**234 tests passing** as of this phase. Frontend has no dedicated test
+**234 tests passing.** Frontend has no dedicated test
 runner -- its contract with the backend is covered by the API tests in
 `tests/test_api.py`, and the build (`npm run build`, TypeScript strict
 mode) is verified to pass cleanly.
@@ -261,7 +245,7 @@ mode) is verified to pass cleanly.
   `tests/test_api.py::TestNoSecretsExposed`, including a check of the
   generated OpenAPI schema).
 - No private keys, signing credentials, or RPC secrets are used or stored
-  by this codebase — KeeperHub's own organization wallet performs signing.
+  by this codebase; KeeperHub's own organization wallet performs signing.
 - CORS is restricted to `localhost:5173`/`127.0.0.1:5173` (the Vite dev
-  server) — not `*`.
+  server), not `*`.
 - Never commit a real `.env`. `.env.example` contains placeholders only.
