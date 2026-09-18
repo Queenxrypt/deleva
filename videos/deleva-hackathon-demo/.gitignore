@@ -1,4 +1,5 @@
 node_modules/
 snapshots/
 .hyperframes/
+chrome-headless-shell/
 *.log
