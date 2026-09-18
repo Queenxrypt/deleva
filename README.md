@@ -180,7 +180,6 @@ explicitly wherever it appears.
 ## Project structure
 
 ```
-almanak-sdk/     vendored, third-party Almanak SDK -- untouched
 proof/           DELEVA backend: engine, API, tests, proof artifacts
   deleva/        the reusable backend package (config, models, risk,
                  strategy, almanak_interface, keeperhub_client, adapter,
@@ -194,12 +193,20 @@ web/             frontend (landing page + product app)
 scratch/         investigation material only, not part of the product
 ```
 
+**`almanak-sdk/` is not included in this repository.** Almanak
+(`almanak==2.28.0`, Apache-2.0, published on PyPI) is installed as a normal
+dependency -- see "Running the backend" below -- not vendored in-tree.
+
 ## Running the backend
+
+Requires Python >=3.12 (the version Almanak's own package requires).
 
 ```bash
 cd proof
-# Uses the same Python environment as almanak-sdk's venv, plus fastapi/uvicorn.
-pip install fastapi uvicorn   # fastapi ships with almanak-sdk's deps already; uvicorn is the one new install
+# almanak-sdk/ is not part of this repository -- Almanak is installed as a
+# normal PyPI dependency, pinned to the exact version this project was built
+# and tested against.
+pip install "almanak==2.28.0" fastapi uvicorn
 
 cp .env.example .env          # fill in real values -- see below
 # minimum for real position data:
@@ -232,8 +239,8 @@ npm install
 npm run dev   # http://localhost:5173, proxies /api to http://127.0.0.1:8000
 ```
 
-Landing page at `/`, product app at `/app` (Overview, Positions, Strategies,
-Activity).
+Landing page at `/`, documentation at `/docs`, product app at `/app`
+(Overview, Positions, Strategies, Activity).
 
 ## Running the tests
 
