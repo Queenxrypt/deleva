@@ -1,0 +1,19 @@
+# DELEVA backend dependencies.
+#
+# The real Almanak SDK is published on PyPI (`pip install almanak`) and provides
+# `almanak.framework.intents` (DeleverageIntent, IntentCompiler, ...) plus its own
+# transitive stack (eth-abi, eth-utils, pydantic, web3, ...). FastAPI is pulled in
+# by almanak as well, but is pinned here explicitly because the API layer depends
+# on it directly. uvicorn is the ASGI server used to run api.main:app. pytest runs
+# the test suite.
+almanak==2.28.0
+fastapi==0.141.1
+uvicorn==0.53.0
+
+# Directly imported by the adapter / tests; pinned to the versions almanak resolves
+# to so the environment stays reproducible.
+eth-abi==6.0.0
+eth-utils==6.0.0
+
+# Test runner.
+pytest==9.1.1
