@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <title>02 detect</title>
+  </head>
+  <body>
+    <template>
+      <style>
+        #root {
+          position: absolute;
+          inset: 0;
+          overflow: hidden;
+          background: #08080a;
+          color: #e9e9ec;
+          font-family: "IBM Plex Mono", ui-monospace, monospace;
+        }
+        #s02-grid {
+          position: absolute;
+          inset: 0;
+          background-image:
+            linear-gradient(to right, #26262c 1px, transparent 1px),
+            linear-gradient(to bottom, #26262c 1px, transparent 1px);
+          background-size: 56px 56px;
+          opacity: 0.32;
+          pointer-events: none;
+        }
+        #s02-stage {
+          position: absolute;
+          inset: 72px 96px 80px;
+          display: flex;
+          flex-direction: column;
+        }
+        #s02-chrome {
+          display: flex;
+          justify-content: space-between;
+          margin-bottom: 36px;
+        }
+        #s02-brand {
+          font-size: 22px;
+          font-weight: 600;
+        }
+        #s02-ctx {
+          font-size: 18px;
+          letter-spacing: 0.12em;
+          text-transform: uppercase;
+          color: #9a9aa4;
+        }
+        #s02-cols {
+          display: grid;
+          grid-template-columns: 1.15fr 0.85fr;
+          gap: 24px;
+          flex: 1;
+        }
+        .s02-card {
+          background: #111114;
+          border: 2px solid #26262c;
+          border-radius: 10px;
+          padding: 40px 44px;
+        }
+        #s02-kicker {
+          font-size: 18px;
+          letter-spacing: 0.14em;
+          text-transform: uppercase;
+          color: #9a9aa4;
+          margin-bottom: 14px;
+        }
+        #s02-title {
+          font-size: 42px;
+          font-weight: 600;
+          letter-spacing: -0.02em;
+          margin-bottom: 28px;
+        }
+        #s02-metrics {
+          display: grid;
+          grid-template-columns: 1fr 1fr;
+          gap: 28px;
+          margin-bottom: 32px;
+        }
+        .s02-lab {
+          font-size: 16px;
+          letter-spacing: 0.1em;
+          text-transform: uppercase;
+          color: #9a9aa4;
+          margin-bottom: 8px;
+        }
+        .s02-val {
+          font-size: 48px;
+          font-weight: 600;
+          font-variant-numeric: tabular-nums;
+        }
+        #s02-hf {
+          color: #ef5350;
+        }
+        #s02-th {
+          color: #e8a33d;
+        }
+        #s02-badge {
+          display: inline-flex;
+          align-items: center;
+          gap: 10px;
+          font-size: 16px;
+          letter-spacing: 0.08em;
+          text-transform: uppercase;
+          color: #ef5350;
+          background: #3a1616;
+          border: 2px solid #3a1616;
+          border-radius: 999px;
+          padding: 8px 16px;
+        }
+        .s02-dot {
+          width: 8px;
+          height: 8px;
+          border-radius: 50%;
+          background: currentColor;
+        }
+        #s02-right .s02-lab {
+          margin-bottom: 22px;
+        }
+        .s02-event {
+          display: grid;
+          grid-template-columns: 16px 1fr;
+          gap: 16px;
+          padding-bottom: 22px;
+          position: relative;
+        }
+        .s02-event:not(:last-child)::before {
+          content: "";
+          position: absolute;
+          left: 7px;
+          top: 18px;
+          bottom: 0;
+          width: 2px;
+          background: #26262c;
+        }
+        .s02-edot {
+          width: 16px;
+          height: 16px;
+          border-radius: 50%;
+          border: 2px solid #37373f;
+          background: #111114;
+          margin-top: 2px;
+        }
+        .s02-edot.danger {
+          border-color: #ef5350;
+        }
+        .s02-etype {
+          font-size: 18px;
+          font-weight: 600;
+          letter-spacing: 0.02em;
+        }
+        .s02-edesc {
+          font-size: 18px;
+          color: #9a9aa4;
+          margin-top: 4px;
+        }
+      </style>
+      <div data-hf-id="hf-c0qs" id="root" data-composition-id="scene-02" data-width="1920" data-height="1080" data-duration="8">
+        <div data-hf-id="hf-gy8j" id="s02-grid"></div>
+        <div data-hf-id="hf-bbz3" id="s02-stage">
+          <div data-hf-id="hf-40ht" id="s02-chrome">
+            <div data-hf-id="hf-49u7" id="s02-brand">DELEVA</div>
+            <div data-hf-id="hf-xfpd" id="s02-ctx">Monitoring · Live</div>
+          </div>
+          <div data-hf-id="hf-zqoq" id="s02-cols">
+            <div data-hf-id="hf-r6av" class="s02-card" id="s02-left">
+              <div data-hf-id="hf-l1xb" id="s02-kicker">Position</div>
+              <div data-hf-id="hf-4mvm" id="s02-title">Risk detected</div>
+              <div data-hf-id="hf-fuei" id="s02-metrics">
+                <div data-hf-id="hf-yeow">
+                  <div data-hf-id="hf-inzk" class="s02-lab">Health factor</div>
+                  <div data-hf-id="hf-9ug8" class="s02-val" id="s02-hf">1.28</div>
+                </div>
+                <div data-hf-id="hf-y7yw">
+                  <div data-hf-id="hf-xhsu" class="s02-lab">Threshold</div>
+                  <div data-hf-id="hf-7vph" class="s02-val" id="s02-th">1.50</div>
+                </div>
+              </div>
+              <div data-hf-id="hf-fll3" id="s02-badge"><span data-hf-id="hf-k0h4" class="s02-dot"></span> Risk detected</div>
+            </div>
+            <div data-hf-id="hf-q4m2" class="s02-card" id="s02-right">
+              <div data-hf-id="hf-dkzu" class="s02-lab">Activity</div>
+              <div data-hf-id="hf-icg0" class="s02-event" id="s02-ev1">
+                <div data-hf-id="hf-tls8" class="s02-edot"></div>
+                <div data-hf-id="hf-x11t">
+                  <div data-hf-id="hf-6bdt" class="s02-etype">POSITION EVALUATED</div>
+                  <div data-hf-id="hf-5ljt" class="s02-edesc">HF 1.2800 · Aave V3 Base</div>
+                </div>
+              </div>
+              <div data-hf-id="hf-t7xn" class="s02-event" id="s02-ev2">
+                <div data-hf-id="hf-55k9" class="s02-edot danger"></div>
+                <div data-hf-id="hf-xfcu">
+                  <div data-hf-id="hf-lwb1" class="s02-etype">RISK THRESHOLD BREACHED</div>
+                  <div data-hf-id="hf-1t0m" class="s02-edesc">HF 1.28 is below trigger 1.50</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <script>
+        (function () {
+          const tl = gsap.timeline({ paused: true });
+          tl.fromTo("#s02-brand", { opacity: 0, y: 14 }, { opacity: 1, y: 0, duration: 0.3, ease: "power3.out" }, 0.08);
+          tl.fromTo("#s02-ctx", { opacity: 0, y: 14 }, { opacity: 1, y: 0, duration: 0.3, ease: "power3.out" }, 0.14);
+          tl.fromTo("#s02-left", { opacity: 0, y: 24 }, { opacity: 1, y: 0, duration: 0.45, ease: "power3.out" }, 0.2);
+          tl.fromTo("#s02-kicker", { opacity: 0, y: 16 }, { opacity: 1, y: 0, duration: 0.28, ease: "power4.out" }, 0.38);
+          tl.fromTo("#s02-title", { opacity: 0, y: 22 }, { opacity: 1, y: 0, duration: 0.38, ease: "power4.out" }, 0.48);
+          tl.fromTo("#s02-metrics", { opacity: 0, y: 16 }, { opacity: 1, y: 0, duration: 0.35, ease: "power3.out" }, 0.7);
+          tl.fromTo("#s02-badge", { opacity: 0, y: 12 }, { opacity: 1, y: 0, duration: 0.32, ease: "power3.out" }, 1.05);
+          tl.fromTo("#s02-right", { opacity: 0, y: 24 }, { opacity: 1, y: 0, duration: 0.45, ease: "power3.out" }, 0.55);
+          tl.fromTo("#s02-ev1", { opacity: 0, y: 18 }, { opacity: 1, y: 0, duration: 0.32, ease: "power3.out" }, 1.2);
+          tl.fromTo("#s02-ev2", { opacity: 0, y: 18 }, { opacity: 1, y: 0, duration: 0.32, ease: "power3.out" }, 1.85);
+          window.__timelines["scene-02"] = tl;
+        })();
+      </script>
+    </template>
+  </body>
+</html>

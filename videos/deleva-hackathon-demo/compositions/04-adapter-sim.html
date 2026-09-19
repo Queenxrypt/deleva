@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <title>04 adapter sim</title>
+  </head>
+  <body>
+    <template>
+      <style>
+        #root {
+          position: absolute;
+          inset: 0;
+          overflow: hidden;
+          background: #08080a;
+          color: #e9e9ec;
+          font-family: "IBM Plex Mono", ui-monospace, monospace;
+        }
+        #s04-grid {
+          position: absolute;
+          inset: 0;
+          background-image:
+            linear-gradient(to right, #26262c 1px, transparent 1px),
+            linear-gradient(to bottom, #26262c 1px, transparent 1px);
+          background-size: 56px 56px;
+          opacity: 0.32;
+          pointer-events: none;
+        }
+        #s04-stage {
+          position: absolute;
+          inset: 72px 96px 80px;
+          display: flex;
+          flex-direction: column;
+        }
+        #s04-chrome {
+          display: flex;
+          justify-content: space-between;
+          margin-bottom: 28px;
+        }
+        #s04-brand {
+          font-size: 22px;
+          font-weight: 600;
+        }
+        #s04-ctx {
+          font-size: 18px;
+          letter-spacing: 0.12em;
+          text-transform: uppercase;
+          color: #5b9dff;
+        }
+        #s04-kicker {
+          font-size: 18px;
+          letter-spacing: 0.14em;
+          text-transform: uppercase;
+          color: #9a9aa4;
+          margin-bottom: 8px;
+        }
+        #s04-title {
+          font-size: 42px;
+          font-weight: 600;
+          margin-bottom: 32px;
+        }
+        #s04-flow {
+          display: flex;
+          align-items: center;
+          gap: 18px;
+          margin-bottom: 28px;
+        }
+        .s04-pill {
+          border: 2px solid #26262c;
+          background: #0c0c0e;
+          border-radius: 999px;
+          padding: 12px 22px;
+          font-size: 18px;
+          color: #9a9aa4;
+        }
+        .s04-sep {
+          color: #9a9aa4;
+          font-size: 22px;
+        }
+        #s04-cols {
+          display: grid;
+          grid-template-columns: 1fr 1fr;
+          gap: 24px;
+          flex: 1;
+        }
+        .s04-card {
+          background: #111114;
+          border: 2px solid #26262c;
+          border-radius: 10px;
+          padding: 36px 40px;
+        }
+        .s04-card-title {
+          font-size: 18px;
+          letter-spacing: 0.1em;
+          text-transform: uppercase;
+          color: #9a9aa4;
+          margin-bottom: 22px;
+        }
+        .s04-line {
+          font-size: 20px;
+          color: #9a9aa4;
+          margin-bottom: 10px;
+        }
+        .s04-line strong {
+          color: #e9e9ec;
+          font-weight: 600;
+        }
+        #s04-sim-status {
+          display: inline-flex;
+          align-items: center;
+          gap: 10px;
+          margin-top: 28px;
+          font-size: 18px;
+          letter-spacing: 0.08em;
+          text-transform: uppercase;
+          color: #34c77b;
+          background: #16371f;
+          border: 2px solid #16371f;
+          border-radius: 999px;
+          padding: 8px 16px;
+        }
+        .s04-dot {
+          width: 8px;
+          height: 8px;
+          border-radius: 50%;
+          background: currentColor;
+        }
+        .s04-leg {
+          display: flex;
+          justify-content: space-between;
+          align-items: baseline;
+          padding: 16px 0;
+          border-top: 2px solid #26262c;
+          font-size: 20px;
+        }
+        .s04-leg:first-of-type {
+          border-top: none;
+          padding-top: 0;
+        }
+        .s04-ok {
+          color: #34c77b;
+          font-weight: 600;
+        }
+      </style>
+      <div data-hf-id="hf-7tgw" id="root" data-composition-id="scene-04" data-width="1920" data-height="1080" data-duration="9.5">
+        <div data-hf-id="hf-woi9" id="s04-grid"></div>
+        <div data-hf-id="hf-7te1" id="s04-stage">
+          <div data-hf-id="hf-yu37" id="s04-chrome">
+            <div data-hf-id="hf-s7f5" id="s04-brand">DELEVA</div>
+            <div data-hf-id="hf-497v" id="s04-ctx">Adapter · KeeperHub</div>
+          </div>
+          <div data-hf-id="hf-zpgt" id="s04-kicker">Translation</div>
+          <div data-hf-id="hf-9mog" id="s04-title">ActionBundle → contract calls</div>
+          <div data-hf-id="hf-fhg9" id="s04-flow">
+            <div data-hf-id="hf-36m4" class="s04-pill" id="s04-p1">ActionBundle</div>
+            <div data-hf-id="hf-cu7y" class="s04-sep" id="s04-a1">→</div>
+            <div data-hf-id="hf-gzvr" class="s04-pill" id="s04-p2">DELEVA adapter</div>
+            <div data-hf-id="hf-1vk3" class="s04-sep" id="s04-a2">→</div>
+            <div data-hf-id="hf-co3p" class="s04-pill" id="s04-p3">KeeperHub simulate</div>
+          </div>
+          <div data-hf-id="hf-z3l0" id="s04-cols">
+            <div data-hf-id="hf-wr4r" class="s04-card" id="s04-left">
+              <div data-hf-id="hf-sv01" class="s04-card-title">DELEVA adapter</div>
+              <div data-hf-id="hf-h5mw" class="s04-line" id="s04-l1">Decode Almanak calldata</div>
+              <div data-hf-id="hf-tapf" class="s04-line" id="s04-l2">Map selector → <strong data-hf-id="hf-wkjh">functionName</strong></div>
+              <div data-hf-id="hf-tu8t" class="s04-line" id="s04-l3">Shape KeeperHub <strong data-hf-id="hf-mef3">contract-call</strong></div>
+              <div data-hf-id="hf-87hp" class="s04-line" id="s04-l4">Preserve order: approve, then repay</div>
+            </div>
+            <div data-hf-id="hf-tyw6" class="s04-card" id="s04-right">
+              <div data-hf-id="hf-7kuv" class="s04-card-title">KeeperHub simulation</div>
+              <div data-hf-id="hf-vdbr" class="s04-leg" id="s04-leg1">
+                <span data-hf-id="hf-n3cm">Approve</span><span data-hf-id="hf-ahat" class="s04-ok">wouldRevert false</span>
+              </div>
+              <div data-hf-id="hf-khu4" class="s04-leg" id="s04-leg2">
+                <span data-hf-id="hf-6pi2">Repay</span><span data-hf-id="hf-a3pl" class="s04-ok">wouldRevert false</span>
+              </div>
+              <div data-hf-id="hf-d6mu" id="s04-sim-status"><span data-hf-id="hf-fj26" class="s04-dot"></span> Simulation passed</div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <script>
+        (function () {
+          const tl = gsap.timeline({ paused: true });
+          tl.fromTo("#s04-brand", { opacity: 0, y: 14 }, { opacity: 1, y: 0, duration: 0.3, ease: "power3.out" }, 0.08);
+          tl.fromTo("#s04-ctx", { opacity: 0, y: 14 }, { opacity: 1, y: 0, duration: 0.3, ease: "power3.out" }, 0.14);
+          tl.fromTo("#s04-kicker", { opacity: 0, y: 16 }, { opacity: 1, y: 0, duration: 0.28, ease: "power4.out" }, 0.22);
+          tl.fromTo("#s04-title", { opacity: 0, y: 20 }, { opacity: 1, y: 0, duration: 0.36, ease: "power4.out" }, 0.32);
+          ["#s04-p1", "#s04-a1", "#s04-p2", "#s04-a2", "#s04-p3"].forEach(function (sel, i) {
+            tl.fromTo(sel, { opacity: 0, y: 14 }, { opacity: 1, y: 0, duration: 0.26, ease: "power3.out" }, 0.55 + i * 0.1);
+          });
+          tl.fromTo("#s04-left", { opacity: 0, y: 22 }, { opacity: 1, y: 0, duration: 0.4, ease: "power3.out" }, 1.15);
+          ["#s04-l1", "#s04-l2", "#s04-l3", "#s04-l4"].forEach(function (sel, i) {
+            tl.fromTo(sel, { opacity: 0, y: 10 }, { opacity: 1, y: 0, duration: 0.24, ease: "power3.out" }, 1.35 + i * 0.12);
+          });
+          tl.fromTo("#s04-right", { opacity: 0, y: 22 }, { opacity: 1, y: 0, duration: 0.4, ease: "power3.out" }, 2.0);
+          tl.fromTo("#s04-leg1", { opacity: 0, y: 12 }, { opacity: 1, y: 0, duration: 0.28, ease: "power3.out" }, 2.25);
+          tl.fromTo("#s04-leg2", { opacity: 0, y: 12 }, { opacity: 1, y: 0, duration: 0.28, ease: "power3.out" }, 2.55);
+          tl.fromTo("#s04-sim-status", { opacity: 0, y: 12 }, { opacity: 1, y: 0, duration: 0.32, ease: "power3.out" }, 3.0);
+          window.__timelines["scene-04"] = tl;
+        })();
+      </script>
+    </template>
+  </body>
+</html>

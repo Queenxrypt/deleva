@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <title>08 lockup</title>
+  </head>
+  <body>
+    <template>
+      <style>
+        #root {
+          position: absolute;
+          inset: 0;
+          overflow: hidden;
+          background: #08080a;
+          color: #e9e9ec;
+          font-family: "IBM Plex Mono", ui-monospace, monospace;
+        }
+        #s08-grid {
+          position: absolute;
+          inset: 0;
+          background-image:
+            linear-gradient(to right, #26262c 1px, transparent 1px),
+            linear-gradient(to bottom, #26262c 1px, transparent 1px);
+          background-size: 56px 56px;
+          opacity: 0.28;
+          pointer-events: none;
+        }
+        #s08-stage {
+          position: absolute;
+          inset: 0;
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          justify-content: center;
+          text-align: center;
+        }
+        #s08-kicker {
+          font-size: 18px;
+          letter-spacing: 0.16em;
+          text-transform: uppercase;
+          color: #9a9aa4;
+          margin-bottom: 18px;
+        }
+        #s08-word {
+          font-size: 96px;
+          font-weight: 600;
+          letter-spacing: -0.03em;
+          margin-bottom: 18px;
+        }
+        #s08-tag {
+          font-size: 28px;
+          color: #9a9aa4;
+          margin-bottom: 36px;
+        }
+        #s08-thesis {
+          font-size: 28px;
+          color: #5b9dff;
+          letter-spacing: 0.01em;
+        }
+      </style>
+      <div data-hf-id="hf-vog9" id="root" data-composition-id="scene-08" data-width="1920" data-height="1080" data-duration="6.5">
+        <div data-hf-id="hf-vuf1" id="s08-grid"></div>
+        <div data-hf-id="hf-1jp1" id="s08-stage">
+          <div data-hf-id="hf-k07t" id="s08-kicker">Almanak × KeeperHub</div>
+          <div data-hf-id="hf-62zc" id="s08-word">DELEVA</div>
+          <div data-hf-id="hf-iekt" id="s08-tag">Autonomous DeFi position management.</div>
+          <div data-hf-id="hf-0r9q" id="s08-thesis">Almanak decides. KeeperHub executes.</div>
+        </div>
+      </div>
+      <script>
+        (function () {
+          const tl = gsap.timeline({ paused: true });
+          tl.fromTo("#s08-kicker", { opacity: 0, y: 16 }, { opacity: 1, y: 0, duration: 0.4, ease: "power3.out" }, 0.15);
+          tl.fromTo("#s08-word", { opacity: 0, y: 28 }, { opacity: 1, y: 0, duration: 0.55, ease: "power3.out" }, 0.35);
+          tl.fromTo("#s08-tag", { opacity: 0, y: 16 }, { opacity: 1, y: 0, duration: 0.4, ease: "power3.out" }, 0.85);
+          tl.fromTo("#s08-thesis", { opacity: 0, y: 16 }, { opacity: 1, y: 0, duration: 0.45, ease: "power3.out" }, 1.25);
+          window.__timelines["scene-08"] = tl;
+        })();
+      </script>
+    </template>
+  </body>
+</html>

@@ -1,0 +1,7 @@
+node_modules/
+snapshots/
+.hyperframes/
+.thumbnails/
+.waveform-cache/
+chrome-headless-shell/
+*.log

@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <title>01 problem</title>
+  </head>
+  <body>
+    <template>
+      <style>
+        #root {
+          position: absolute;
+          inset: 0;
+          overflow: hidden;
+          background: #08080a;
+          color: #e9e9ec;
+          font-family: "IBM Plex Mono", ui-monospace, monospace;
+        }
+        #s01-grid {
+          position: absolute;
+          inset: 0;
+          background-image:
+            linear-gradient(to right, #26262c 1px, transparent 1px),
+            linear-gradient(to bottom, #26262c 1px, transparent 1px);
+          background-size: 56px 56px;
+          opacity: 0.32;
+          pointer-events: none;
+        }
+        #s01-stage {
+          position: absolute;
+          inset: 72px 96px 80px;
+          display: flex;
+          flex-direction: column;
+        }
+        #s01-chrome {
+          display: flex;
+          justify-content: space-between;
+          align-items: baseline;
+          margin-bottom: 48px;
+        }
+        #s01-brand,
+        #s01-ctx {
+          font-size: 18px;
+          letter-spacing: 0.12em;
+          text-transform: uppercase;
+          color: #9a9aa4;
+        }
+        #s01-brand {
+          color: #e9e9ec;
+          font-weight: 600;
+          letter-spacing: 0.04em;
+          text-transform: none;
+          font-size: 22px;
+        }
+        #s01-card {
+          background: #111114;
+          border: 2px solid #26262c;
+          border-radius: 10px;
+          padding: 48px 56px;
+          flex: 1;
+          display: flex;
+          flex-direction: column;
+          justify-content: space-between;
+        }
+        #s01-eyebrow {
+          font-size: 18px;
+          letter-spacing: 0.14em;
+          text-transform: uppercase;
+          color: #9a9aa4;
+          margin-bottom: 18px;
+        }
+        #s01-label {
+          font-size: 18px;
+          letter-spacing: 0.1em;
+          text-transform: uppercase;
+          color: #9a9aa4;
+          margin-bottom: 8px;
+        }
+        #s01-hero-row {
+          display: flex;
+          justify-content: space-between;
+          align-items: flex-end;
+          gap: 32px;
+        }
+        #s01-hf {
+          font-size: 96px;
+          font-weight: 600;
+          line-height: 1;
+          letter-spacing: -0.03em;
+          color: #ef5350;
+          font-variant-numeric: tabular-nums;
+          display: inline-block;
+          transform-origin: left center;
+        }
+        #s01-badge {
+          display: inline-flex;
+          align-items: center;
+          gap: 10px;
+          font-size: 16px;
+          letter-spacing: 0.08em;
+          text-transform: uppercase;
+          color: #ef5350;
+          background: #3a1616;
+          border: 2px solid #3a1616;
+          border-radius: 999px;
+          padding: 8px 16px;
+        }
+        #s01-dot {
+          width: 8px;
+          height: 8px;
+          border-radius: 50%;
+          background: #ef5350;
+        }
+        #s01-stats {
+          display: grid;
+          grid-template-columns: 1fr 1fr 1fr;
+          gap: 32px;
+          margin-top: 36px;
+        }
+        .s01-stat-label {
+          font-size: 16px;
+          letter-spacing: 0.1em;
+          text-transform: uppercase;
+          color: #9a9aa4;
+          margin-bottom: 8px;
+        }
+        .s01-stat-value {
+          font-size: 32px;
+          font-weight: 600;
+          color: #e9e9ec;
+          font-variant-numeric: tabular-nums;
+        }
+        #s01-scale-wrap {
+          margin-top: 40px;
+        }
+        #s01-track {
+          position: relative;
+          height: 10px;
+          background: #17171b;
+          border: 2px solid #26262c;
+          border-radius: 999px;
+          overflow: visible;
+        }
+        #s01-fill {
+          position: absolute;
+          left: 0;
+          top: 0;
+          bottom: 0;
+          width: 100%;
+          background: #ef5350;
+          transform: scaleX(0);
+          transform-origin: left center;
+          border-radius: 999px;
+        }
+        #s01-tick {
+          position: absolute;
+          left: 40%;
+          top: -6px;
+          bottom: -6px;
+          width: 3px;
+          background: #e8a33d;
+          z-index: 1;
+        }
+        #s01-scale-meta {
+          display: flex;
+          justify-content: space-between;
+          margin-top: 10px;
+          font-size: 16px;
+          color: #9a9aa4;
+        }
+        #s01-trig {
+          color: #e8a33d;
+        }
+      </style>
+      <div data-hf-id="hf-mf7c" id="root" data-composition-id="scene-01" data-width="1920" data-height="1080" data-duration="7">
+        <div data-hf-id="hf-1ap6" id="s01-grid"></div>
+        <div data-hf-id="hf-scyw" id="s01-stage">
+          <div data-hf-id="hf-ihc4" id="s01-chrome">
+            <div data-hf-id="hf-60c4" id="s01-brand">DELEVA</div>
+            <div data-hf-id="hf-3xdh" id="s01-ctx">Aave V3 · Base</div>
+          </div>
+          <div data-hf-id="hf-o54k" id="s01-card">
+            <div data-hf-id="hf-yeow">
+              <div data-hf-id="hf-c12e" id="s01-eyebrow">Aave V3 position</div>
+              <div data-hf-id="hf-trcl" id="s01-hero-row">
+                <div data-hf-id="hf-y7yw">
+                  <div data-hf-id="hf-el41" id="s01-label">Health factor</div>
+                  <div data-hf-id="hf-xgxi" id="s01-hf">0.00</div>
+                </div>
+                <div data-hf-id="hf-m4w6" id="s01-badge"><span data-hf-id="hf-bczq" id="s01-dot"></span> Threshold breached</div>
+              </div>
+              <div data-hf-id="hf-4e1b" id="s01-stats">
+                <div data-hf-id="hf-x11t">
+                  <div data-hf-id="hf-nyz0" class="s01-stat-label">Risk threshold</div>
+                  <div data-hf-id="hf-5ggn" class="s01-stat-value">1.50</div>
+                </div>
+                <div data-hf-id="hf-xfcu">
+                  <div data-hf-id="hf-67gd" class="s01-stat-label">Debt</div>
+                  <div data-hf-id="hf-4k2d" class="s01-stat-value">$19.9977</div>
+                </div>
+                <div data-hf-id="hf-w8fr">
+                  <div data-hf-id="hf-pi3l" class="s01-stat-label">Collateral</div>
+                  <div data-hf-id="hf-neoq" class="s01-stat-value">$30.84</div>
+                </div>
+              </div>
+            </div>
+            <div data-hf-id="hf-zr15" id="s01-scale-wrap">
+              <div data-hf-id="hf-3399" class="s01-stat-label">Risk scale</div>
+              <div data-hf-id="hf-mn0f" id="s01-track">
+                <div data-hf-id="hf-wjzl" id="s01-fill"></div>
+                <div data-hf-id="hf-w43t" id="s01-tick"></div>
+              </div>
+              <div data-hf-id="hf-6z76" id="s01-scale-meta">
+                <span data-hf-id="hf-i6df">0</span>
+                <span data-hf-id="hf-52x1" id="s01-trig">Trigger 1.50</span>
+                <span data-hf-id="hf-b5bt">3.75+</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <script>
+        (function () {
+          const tl = gsap.timeline({ paused: true });
+          const hf = document.getElementById("s01-hf");
+          const state = { value: 0 };
+          tl.fromTo("#s01-brand", { opacity: 0, y: 16 }, { opacity: 1, y: 0, duration: 0.35, ease: "power3.out" }, 0.1);
+          tl.fromTo("#s01-ctx", { opacity: 0, y: 16 }, { opacity: 1, y: 0, duration: 0.35, ease: "power3.out" }, 0.18);
+          tl.fromTo("#s01-card", { opacity: 0, y: 28 }, { opacity: 1, y: 0, duration: 0.5, ease: "power3.out" }, 0.22);
+          tl.fromTo("#s01-eyebrow", { opacity: 0, y: 18 }, { opacity: 1, y: 0, duration: 0.32, ease: "power4.out" }, 0.42);
+          tl.fromTo("#s01-label", { opacity: 0, y: 14 }, { opacity: 1, y: 0, duration: 0.28, ease: "power4.out" }, 0.5);
+          tl.fromTo("#s01-hf", { scale: 0.86, opacity: 0 }, { scale: 1, opacity: 1, duration: 0.7, ease: "power3.out" }, 0.55);
+          tl.to(
+            state,
+            {
+              value: 1.28,
+              duration: 1.15,
+              ease: "power2.out",
+              onUpdate: function () {
+                hf.textContent = state.value.toFixed(2);
+              },
+            },
+            0.55
+          );
+          tl.fromTo("#s01-badge", { opacity: 0, y: 12 }, { opacity: 1, y: 0, duration: 0.35, ease: "power3.out" }, 1.45);
+          tl.fromTo("#s01-stats", { opacity: 0, y: 16 }, { opacity: 1, y: 0, duration: 0.4, ease: "power3.out" }, 1.55);
+          tl.fromTo("#s01-scale-wrap", { opacity: 0 }, { opacity: 1, duration: 0.3, ease: "power2.out" }, 1.7);
+          tl.fromTo("#s01-fill", { scaleX: 0 }, { scaleX: 0.341, duration: 0.9, ease: "power2.out" }, 1.75);
+          window.__timelines["scene-01"] = tl;
+        })();
+      </script>
+    </template>
+  </body>
+</html>

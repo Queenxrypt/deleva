@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=1920, height=1080">
+    <title>DELEVA — Almanak decides. KeeperHub executes.</title>
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.14.2/dist/gsap.min.js"></script>
+    <style>
+      * {
+        box-sizing: border-box;
+      }
+      html,
+      body {
+        margin: 0;
+        width: 1920px;
+        height: 1080px;
+        overflow: hidden;
+        background: #08080a;
+      }
+      #root {
+        position: relative;
+        width: 100%;
+        height: 100%;
+        overflow: hidden;
+        background: #08080a;
+      }
+      [data-composition-id="root"] > div[data-composition-src] {
+        position: absolute;
+        inset: 0;
+      }
+    </style>
+  </head>
+  <body>
+    <div data-hf-id="hf-pijv" id="root" data-composition-id="root" data-start="0" data-width="1920" data-height="1080" data-duration="69.5">
+      <div data-hf-id="hf-2qza" id="el-scene-01" data-composition-id="scene-01" data-composition-src="compositions/01-problem.html" data-start="0" data-duration="7" data-width="1920" data-height="1080" data-track-index="1"></div>
+      <div data-hf-id="hf-cs8f" id="el-scene-02" data-composition-id="scene-02" data-composition-src="compositions/02-detect.html" data-start="7" data-duration="8" data-width="1920" data-height="1080" data-track-index="1"></div>
+      <div data-hf-id="hf-7dh7" id="el-scene-03" data-composition-id="scene-03" data-composition-src="compositions/03-almanak.html" data-start="15" data-duration="9.5" data-width="1920" data-height="1080" data-track-index="1"></div>
+      <div data-hf-id="hf-te9j" id="el-scene-04" data-composition-id="scene-04" data-composition-src="compositions/04-adapter-sim.html" data-start="24.5" data-duration="9.5" data-width="1920" data-height="1080" data-track-index="1"></div>
+      <div data-hf-id="hf-xtyh" id="el-scene-05" data-composition-id="scene-05" data-composition-src="compositions/05-execute.html" data-start="34" data-duration="7" data-width="1920" data-height="1080" data-track-index="1"></div>
+      <div data-hf-id="hf-fapl" id="el-scene-06" data-composition-id="scene-06" data-composition-src="compositions/06-autonomous.html" data-start="41" data-duration="12" data-width="1920" data-height="1080" data-track-index="1"></div>
+      <div data-hf-id="hf-ut2g" id="el-scene-07" data-composition-id="scene-07" data-composition-src="compositions/07-manual-proof.html" data-start="53" data-duration="10" data-width="1920" data-height="1080" data-track-index="1"></div>
+      <div data-hf-id="hf-itg7" id="el-scene-08" data-composition-id="scene-08" data-composition-src="compositions/08-lockup.html" data-start="63" data-duration="6.5" data-width="1920" data-height="1080" data-track-index="1"></div>
+
+      <audio data-hf-id="hf-vr3d" id="vo-01" src="assets/voice/01-hook.wav" data-start="0.4" data-duration="3.563" data-track-index="10" data-volume="1"></audio>
+      <audio data-hf-id="hf-006c" id="vo-02" src="assets/voice/02-detect.wav" data-start="7.4" data-duration="4.629" data-track-index="10" data-volume="1"></audio>
+      <audio data-hf-id="hf-vt16" id="vo-03" src="assets/voice/03-almanak.wav" data-start="15.4" data-duration="5.205" data-track-index="10" data-volume="1"></audio>
+      <audio data-hf-id="hf-vmro" id="vo-04" src="assets/voice/04-adapter.wav" data-start="24.9" data-duration="5.376" data-track-index="10" data-volume="1"></audio>
+      <audio data-hf-id="hf-6soh" id="vo-05" src="assets/voice/05-execute.wav" data-start="34.4" data-duration="3.605" data-track-index="10" data-volume="1"></audio>
+      <audio data-hf-id="hf-einw" id="vo-06" src="assets/voice/06-autonomous.wav" data-start="41.4" data-duration="9.984" data-track-index="10" data-volume="1"></audio>
+      <audio data-hf-id="hf-i77a" id="vo-07" src="assets/voice/07-proof.wav" data-start="53.4" data-duration="6.784" data-track-index="10" data-volume="1"></audio>
+      <audio data-hf-id="hf-d7u8" id="vo-08" src="assets/voice/08-lockup.wav" data-start="63.4" data-duration="3.669" data-track-index="10" data-volume="1"></audio>
+
+      <audio data-hf-id="hf-ih52" id="sfx-open" src="assets/sfx/whoosh-short.mp3" data-start="0.12" data-duration="0.6" data-track-index="11" data-volume="0.18"></audio>
+      <audio data-hf-id="hf-58s2" id="sfx-risk" src="assets/sfx/notification.mp3" data-start="8.05" data-duration="1.4" data-track-index="11" data-volume="0.16"></audio>
+      <audio data-hf-id="hf-ok9u" id="sfx-bundle" src="assets/sfx/click-soft.mp3" data-start="17" data-duration="0.37" data-track-index="11" data-volume="0.22"></audio>
+      <audio data-hf-id="hf-4xev" id="sfx-sim" src="assets/sfx/ping.mp3" data-start="27.5" data-duration="0.9" data-track-index="11" data-volume="0.2"></audio>
+      <audio data-hf-id="hf-ng7w" id="sfx-exec" src="assets/sfx/ping.mp3" data-start="34.55" data-duration="0.9" data-track-index="11" data-volume="0.2"></audio>
+      <audio data-hf-id="hf-oigv" id="sfx-hash" src="assets/sfx/click-soft.mp3" data-start="53.85" data-duration="0.37" data-track-index="11" data-volume="0.2"></audio>
+    </div>
+    <script>
+      window.__timelines["root"] = gsap.timeline({ paused: true });
+    </script>
+  </body>
+</html>
